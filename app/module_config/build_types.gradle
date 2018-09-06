@@ -1,0 +1,20 @@
+apply plugin: 'com.android.application'
+android {
+    buildTypes {
+        debug {
+            buildConfigField 'String', "BUILD_SUFFIX", "\"DEBUG\""
+            ext.enableCrashlytics = false
+            resValue("string", "app_name", "nudg debug")
+            testCoverageEnabled true
+        }
+        release {
+            buildConfigField 'String', 'BUILD_SUFFIX', "\"RELEASE\""
+            ext.enableCrashlytics = true
+            resValue("string", "app_name", "nudg")
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            debuggable false
+            minifyEnabled true
+        }
+    }
+}

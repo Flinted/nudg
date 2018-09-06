@@ -1,0 +1,11 @@
+apply plugin: 'com.android.application'
+android {
+    signingConfigs {
+        release {
+            keyAlias 'android application key store'
+            keyPassword 'QkdMkhc8bP+U4tJygm7WBeZH_xbU9?U$'
+            storeFile file('../config/keystore/IPOS_ANDROID_KEYSTORE.jks')
+            storePassword '*pMUGesL9REnp8E$yXZPfaE@YaKPC-V?'
+        }
+    }
+}

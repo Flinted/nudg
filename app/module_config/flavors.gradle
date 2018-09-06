@@ -1,0 +1,17 @@
+apply plugin: 'com.android.application'
+android {
+    productFlavors {
+        internal {
+            dimension "default"
+            def appName = "nudg debug"
+            applicationId "chris.did.nudg"
+            resValue("string", "application.name", appName)
+        }
+        production {
+            dimension "default"
+            def appName = "nudg"
+            applicationId "chris.did.nudg"
+            resValue("string", "application.name", appName)
+        }
+    }
+}

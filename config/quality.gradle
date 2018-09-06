@@ -1,0 +1,66 @@
+apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+
+
+check.dependsOn 'checkstyleMain', 'findbugs', 'lint'
+
+checkstyle {
+    toolVersion '7.8.1'
+    configFile file("${project.rootDir}/config/quality/checkstyle/checkstyle.xml")
+}
+
+task checkstyleMain(type: Checkstyle) {
+    description 'Check code standard'
+    ignoreFailures = true
+    source 'src'
+    include '**/*.java'
+    include '**/*.kt'
+    exclude '**/gen/**'
+    classpath = files('src/main/java')
+    reports {
+        xml {
+            enabled = false
+        }
+        html {
+            enabled = true
+            setDestination(new File("$project.buildDir/reports/quality/checkstyle.html"))
+        }
+    }
+}
+
+task findbugs(type: FindBugs, dependsOn: 'assembleDebug') {
+    description 'Finds common bugs'
+    ignoreFailures = true
+    effort = "max"
+    reportLevel = "high"
+    excludeFilter = new File("${project.rootDir}/config/quality/findbugs/findbugs-filter.xml")
+    classes = files("${project.rootDir}/view/build/intermediates/classes")
+
+    source fileTree('src/main/java')
+    include '**/*.java'
+    include '**/*.kt'
+    exclude '**/gen/**'
+
+    reports {
+        xml {
+            enabled = false
+        }
+        html {
+            enabled = true
+            setDestination(new File("$project.buildDir/reports/quality/findbugs.html"))
+        }
+    }
+
+    classpath = files()
+}
+
+android {
+    lintOptions {
+        abortOnError false
+        xmlReport false
+        htmlReport true
+        lintConfig file("${project.rootDir}/config/quality/lint/lint.xml")
+        htmlOutput file("$project.buildDir/reports/quality/lint-result.html")
+        disable 'InvalidPackage'
+    }
+}
