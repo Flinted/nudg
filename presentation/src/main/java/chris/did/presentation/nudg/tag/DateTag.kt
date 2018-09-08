@@ -2,12 +2,13 @@ package chris.did.presentation.nudg.tag
 
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
+import java.util.*
 
 /**
  * DateTag
  */
 
-class DateTag(override val tag: String) : Tag {
+data class DateTag(override val id: UUID, override val tag: String) : Tag {
     companion object {
         private val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd")
     }
