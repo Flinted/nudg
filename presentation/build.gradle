@@ -44,7 +44,7 @@ dependencies {
 
     testImplementation libs.jUnit
     testImplementation "org.mockito:mockito-core:$MOCKITO_VERSION"
-    compile project(path: ':data')
+    implementation project(path: ':data')
 }
 kotlin {
     experimental {

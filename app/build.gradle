@@ -61,6 +61,8 @@ android {
     packagingOptions {
         pickFirst 'org/threeten/bp/format/ChronologyText.properties'
     }
+
+    kotlin { experimental { coroutines 'enable' } }
 }
 
 def computeVersionName() {

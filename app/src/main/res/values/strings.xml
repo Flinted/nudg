@@ -1,2 +1,3 @@
 <resources>
+    <string name="error_default_message">Sorry, something went wrong!</string>
 </resources>
