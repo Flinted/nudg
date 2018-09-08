@@ -1,3 +1,4 @@
 <resources>
     <string name="error_default_message">Sorry, something went wrong!</string>
+    <string name="nudg_input_error">Invalid Nudg</string>
 </resources>

@@ -8,8 +8,8 @@ import java.util.*
  * NudgRepository
  */
 class NudgRepository : Repository {
+
     override fun postNudg(nudgData: NudgData) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun getNudgs(): List<NudgData> {
@@ -42,5 +42,4 @@ class NudgRepository : Repository {
     override fun deleteNudgsByIds(vararg ids: String) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
-
 }

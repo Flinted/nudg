@@ -5,6 +5,8 @@ import chris.did.presentation.base.BasePresentable
 /**
  * OverviewPresentable
  */
-interface OverviewPresentable: BasePresentable<OverviewPresenterListener> {
+interface OverviewPresentable : BasePresentable<OverviewPresenterListener> {
+
     fun getNudgs()
+    fun saveNudg(nudg: String?)
 }

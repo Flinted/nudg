@@ -24,11 +24,14 @@ class TagFactory(private val systemTags: HashSet<String>) : TagParser, TagDataCo
         private val USER_TYPE = "USER"
     }
 
-
     override fun parseTags(string: String): List<Tag> {
         if (string.isEmpty()) return listOf()
         val matcher = createTagMatcher(string)
-        return extractTags(matcher)
+        val tags = extractTags(matcher)
+        return when {
+            tags.isEmpty() -> listOf(SystemTag(UUID.randomUUID(), "NoTag"))
+            else           -> tags
+        }
     }
 
     override fun convertToTagData(tag: Tag): TagData {
