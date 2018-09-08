@@ -1,10 +1,14 @@
 package chris.did.nudg.overview
 
+import chris.did.data.nudgservice.NudgServicable
 import chris.did.nudg.base.BaseApplication
+import chris.did.presentation.nudgfactory.NudgCreator
 import chris.did.presentation.overview.OverviewPresentable
 import chris.did.presentation.overview.OverviewPresenter
+import chris.did.presentation.usecase.GetNudgsUseCase
 import dagger.Module
 import dagger.Provides
+import kotlin.coroutines.experimental.CoroutineContext
 
 /**
  * OverviewViewModelModule
@@ -13,12 +17,23 @@ import dagger.Provides
 class OverviewViewModelModule {
 
     @Provides
-    fun provideOverviewViewModel(): OverviewPresentable {
-        return OverviewPresenter()
+    fun provideGetNudgsUseCase(
+        nudgFactory: NudgCreator,
+        nudgServicable: NudgServicable
+    ): GetNudgsUseCase {
+        return GetNudgsUseCase(nudgServicable, nudgFactory)
     }
 
     @Provides
-    fun provideSignInViewModel(
+    fun provideOverviewPresenter(
+        getNudgsUseCase: GetNudgsUseCase,
+        coroutineContext: CoroutineContext
+    ): OverviewPresentable {
+        return OverviewPresenter(getNudgsUseCase, coroutineContext)
+    }
+
+    @Provides
+    fun provideOverviewViewModel(
         application: BaseApplication,
         presenter: OverviewPresentable
     ): OverviewViewModel {

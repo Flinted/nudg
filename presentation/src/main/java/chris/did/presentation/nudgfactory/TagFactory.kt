@@ -1,7 +1,7 @@
 package chris.did.presentation.nudgfactory
 
-import chris.did.data.RealmTagData
-import chris.did.data.TagData
+import chris.did.data.tagdata.RealmTagData
+import chris.did.data.tagdata.TagData
 import chris.did.presentation.nudg.tag.DateTag
 import chris.did.presentation.nudg.tag.SystemTag
 import chris.did.presentation.nudg.tag.Tag

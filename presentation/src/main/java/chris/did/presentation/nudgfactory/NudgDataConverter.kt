@@ -1,6 +1,6 @@
 package chris.did.presentation.nudgfactory
 
-import chris.did.data.NudgData
+import chris.did.data.nudgdata.NudgData
 import chris.did.presentation.nudg.Nudg
 
 /**

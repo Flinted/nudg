@@ -1,6 +1,6 @@
-package chris.did.data
+package chris.did.data.nudgdata
 
-import java.util.*
+import chris.did.data.tagdata.TagData
 
 /**
  * RealmNudgData

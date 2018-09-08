@@ -1,4 +1,4 @@
-package chris.did.nudg.usecase
+package chris.did.presentation.usecase
 
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch

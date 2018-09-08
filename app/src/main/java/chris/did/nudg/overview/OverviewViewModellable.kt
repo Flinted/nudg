@@ -6,4 +6,5 @@ package chris.did.nudg.overview
 
 interface OverviewViewModellable {
 
+    fun getNudgs()
 }

@@ -1,4 +1,4 @@
-package chris.did.data
+package chris.did.data.tagdata
 
 /**
  * RealmTagData

@@ -1,4 +1,4 @@
-package chris.did.nudg.usecase
+package chris.did.presentation.usecase
 
 /**
  * Failure

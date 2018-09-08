@@ -1,4 +1,6 @@
-package chris.did.data
+package chris.did.data.nudgdata
+
+import chris.did.data.tagdata.TagData
 
 /**
  * NudgData

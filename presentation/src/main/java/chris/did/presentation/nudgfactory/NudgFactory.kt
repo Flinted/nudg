@@ -1,7 +1,7 @@
 package chris.did.presentation.nudgfactory
 
-import chris.did.data.NudgData
-import chris.did.data.RealmNudgData
+import chris.did.data.nudgdata.NudgData
+import chris.did.data.nudgdata.RealmNudgData
 import chris.did.presentation.nudg.DeletedNudg
 import chris.did.presentation.nudg.Nudg
 import chris.did.presentation.nudg.UserNudg
@@ -20,7 +20,12 @@ class NudgFactory(private val tagFactory: TagParser) : NudgCreator, NudgDataConv
     override fun convertToNudgData(nudg: Nudg): NudgData {
         val isDeleted = nudg is DeletedNudg
         val tagData = (tagFactory as TagDataConverter).convertAllToTagData(nudg.tags)
-        return RealmNudgData(nudg.id.toString(), nudg.text, tagData, isDeleted)
+        return RealmNudgData(
+            nudg.id.toString(),
+            nudg.text,
+            tagData,
+            isDeleted
+        )
     }
 
     override fun convertToNudg(data: NudgData): Nudg {

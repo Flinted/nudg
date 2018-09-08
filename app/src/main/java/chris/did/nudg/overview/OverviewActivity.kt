@@ -26,5 +26,6 @@ class OverviewActivity: BaseActivity() {
         getViewModelComponent().inject(this)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_overview)
         viewModel = ViewModelProviders.of(this, factory).get(OverviewViewModel::class.java)
+        viewModel.getNudgs()
     }
 }
