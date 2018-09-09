@@ -1,9 +1,6 @@
 package chris.did.nudg.injection.application
 
-import chris.did.presentation.nudgfactory.NudgCreator
-import chris.did.presentation.nudgfactory.NudgFactory
-import chris.did.presentation.nudgfactory.SectionFactory
-import chris.did.presentation.nudgfactory.SectionParser
+import chris.did.presentation.nudgfactory.*
 import chris.did.presentation.nudgviewmodelfactory.NudgViewModelCreator
 import chris.did.presentation.nudgviewmodelfactory.NudgViewModelFactory
 import chris.did.presentation.nudgviewmodelfactory.SectionViewModelCreator
@@ -19,7 +16,7 @@ class FactoryModule {
 
     @Provides
     fun provideTagFactory(): SectionParser {
-        return SectionFactory(hashSetOf("MON"))
+        return SectionFactory(SystemTags.TAGS)
     }
 
     @Provides

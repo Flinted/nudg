@@ -25,11 +25,3 @@ class UserNudgViewModel(
         return builder
     }
 }
-//
-//private fun SpannableStringBuilder.append(
-//    text: CharSequence,
-//    textColorRes: Int ) {
-//    val index = length
-//    append(text)
-//    setSpan(ForegroundColorSpan(textColorRes), index, index + text.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
-//}
