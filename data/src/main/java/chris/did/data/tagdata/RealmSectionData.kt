@@ -4,9 +4,9 @@ import io.realm.RealmModel
 import io.realm.annotations.PrimaryKey
 
 /**
- * RealmTagData
+ * RealmSectionData
  */
-class RealmTagData(
+class RealmSectionData(
     @PrimaryKey override val id: String,
     override val tag: String,
     override val type: String

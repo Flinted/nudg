@@ -24,6 +24,15 @@
             app:layout_constraintBottom_toTopOf="@id/overview_nudg_input"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/test_nudg_text"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:textSize="16sp"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <EditText
             android:id="@+id/overview_nudg_input"
             android:layout_width="match_parent"

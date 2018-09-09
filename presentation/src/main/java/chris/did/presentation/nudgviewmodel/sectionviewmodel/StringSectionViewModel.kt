@@ -1,5 +1,6 @@
 package chris.did.presentation.nudgviewmodel.sectionviewmodel
 
+import android.text.SpannableString
 import chris.did.presentation.nudg.section.Section
 
 /**
@@ -8,6 +9,10 @@ import chris.did.presentation.nudg.section.Section
 class StringSectionViewModel(private val stringSection: Section) : SectionViewModel {
 
     override fun getId() = stringSection.id
+    override fun getFormattedValue() = colouredSpannable
+    private val colouredSpannable = createSpannable()
 
-    override fun getFormattedValue() = stringSection.value
+    private fun createSpannable(): SpannableString {
+        return SpannableString(stringSection.value)
+    }
 }

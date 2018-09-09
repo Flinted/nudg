@@ -18,7 +18,6 @@ class NudgFactoryTest {
     fun canCreateNudgCorrectly() {
         val testString = "Testing ${testTags[0]} ${testTags[1]} ${testTags[2]} ${testTags[3]}"
         val nudg = nudgFactory.createNewNudg(testString)
-        assertEquals(4, nudg.tags.size)
-        assertEquals(8, nudg.text.size)
+        assertEquals(8, nudg.sections.size)
     }
 }

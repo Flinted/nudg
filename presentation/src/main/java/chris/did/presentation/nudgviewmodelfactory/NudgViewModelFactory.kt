@@ -9,11 +9,11 @@ import chris.did.presentation.nudgviewmodel.UserNudgViewModel
 /**
  * NudgViewModelFactory
  */
-class NudgViewModelFactory(private val tagViewModelFactory: TagViewModelCreator) : NudgViewModelCreator {
+class NudgViewModelFactory(private val tagViewModelFactory: SectionViewModelCreator) : NudgViewModelCreator {
 
     override fun create(nudgs: List<Nudg>): List<NudgViewModel> {
         return nudgs.map { nudg ->
-            val tags = tagViewModelFactory.create(nudg.tags)
+            val tags = tagViewModelFactory.create(nudg.sections)
             when (nudg) {
                 is DeletedNudg -> DeletedNudgViewModel(nudg, tags)
                 else           -> UserNudgViewModel(nudg, tags)

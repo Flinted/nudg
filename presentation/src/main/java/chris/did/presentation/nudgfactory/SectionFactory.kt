@@ -1,6 +1,6 @@
 package chris.did.presentation.nudgfactory
 
-import chris.did.data.tagdata.RealmTagData
+import chris.did.data.tagdata.RealmSectionData
 import chris.did.data.tagdata.SectionData
 import chris.did.presentation.nudg.section.*
 import java.util.*
@@ -34,7 +34,7 @@ class SectionFactory(private val systemTags: HashSet<String>) : SectionParser,
             is UserTagSection   -> USER_TYPE
             else                -> STRING_TYPE
         }
-        return RealmTagData(tag.id.toString(), tag.value, type)
+        return RealmSectionData(tag.id.toString(), tag.value, type)
     }
 
     override fun convertToTag(data: SectionData): Section {
@@ -54,9 +54,7 @@ class SectionFactory(private val systemTags: HashSet<String>) : SectionParser,
         data.map { tagData -> convertToTag(tagData) }
 
     private fun extractTags(input: List<String>): List<Section> {
-        return input.filter { section -> StringParser.isTag(section) }
-            .map { section -> createTag(UUID.randomUUID(), section) }
-            .distinctBy { it.value }
+        return input.map { section -> createTag(UUID.randomUUID(), section) }
             .toList()
     }
 

@@ -2,6 +2,7 @@ package chris.did.data.repository
 
 import chris.did.data.nudgdata.NudgData
 import chris.did.data.nudgdata.RealmNudgData
+import chris.did.data.tagdata.RealmSectionData
 import java.util.*
 
 /**
@@ -16,8 +17,20 @@ class NudgRepository : Repository {
         return listOf(
             RealmNudgData(
                 UUID.randomUUID().toString(),
-                listOf("IT WORKS"),
-                listOf(),
+                listOf(
+                    RealmSectionData(UUID.randomUUID().toString(), "Testing ", "STRING"),
+                    RealmSectionData(UUID.randomUUID().toString(), "#tags", "USER"),
+                    RealmSectionData(UUID.randomUUID().toString(), " as well as ", "STRING"),
+                    RealmSectionData(UUID.randomUUID().toString(), "#2013/10/14", "DATE"),
+                    RealmSectionData(UUID.randomUUID().toString(), " ", "STRING"),
+                    RealmSectionData(UUID.randomUUID().toString(), "#MON", "SYSTEM"),
+                    RealmSectionData(
+                        UUID.randomUUID().toString(),
+                        ", It's actually worked ",
+                        "STRING"
+                    ),
+                    RealmSectionData(UUID.randomUUID().toString(), "#WOOO!", "USER")
+                ),
                 false
             )
         )

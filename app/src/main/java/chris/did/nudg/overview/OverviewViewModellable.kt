@@ -12,6 +12,7 @@ interface OverviewViewModellable {
 
     val inputValid: ObservableBoolean
     val nudgInput: ObservableField<String>
+    fun setListener(listener: OverviewViewModelListener)
     fun nudgInputChanged(input: CharSequence)
     fun getNudgs()
     fun onSaveNudgTapped(view: View)

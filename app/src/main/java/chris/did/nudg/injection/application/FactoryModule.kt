@@ -6,8 +6,8 @@ import chris.did.presentation.nudgfactory.SectionFactory
 import chris.did.presentation.nudgfactory.SectionParser
 import chris.did.presentation.nudgviewmodelfactory.NudgViewModelCreator
 import chris.did.presentation.nudgviewmodelfactory.NudgViewModelFactory
-import chris.did.presentation.nudgviewmodelfactory.TagViewModelCreator
-import chris.did.presentation.nudgviewmodelfactory.TagViewModelFactory
+import chris.did.presentation.nudgviewmodelfactory.SectionViewModelCreator
+import chris.did.presentation.nudgviewmodelfactory.SectionViewModelFactory
 import dagger.Module
 import dagger.Provides
 
@@ -28,12 +28,12 @@ class FactoryModule {
     }
 
     @Provides
-    fun provideTagViewModelFactory(): TagViewModelCreator {
-        return TagViewModelFactory()
+    fun provideTagViewModelFactory(): SectionViewModelCreator {
+        return SectionViewModelFactory()
     }
 
     @Provides
-    fun provideNudgViewModelFactory(tagViewModelFactory: TagViewModelCreator): NudgViewModelCreator {
+    fun provideNudgViewModelFactory(tagViewModelFactory: SectionViewModelCreator): NudgViewModelCreator {
         return NudgViewModelFactory(tagViewModelFactory)
     }
 }

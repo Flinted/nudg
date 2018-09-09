@@ -21,9 +21,14 @@ class OverviewViewModel(
 
     override var nudgInput = ObservableField<String>("")
     override val inputValid = ObservableBoolean(true)
+    private var listener: OverviewViewModelListener? = null
 
     init {
         this.presenter.setListener(this)
+    }
+
+    override fun setListener(listener: OverviewViewModelListener) {
+        this.listener = listener
     }
 
     override fun nudgInputChanged(input: CharSequence) {
@@ -49,7 +54,7 @@ class OverviewViewModel(
 
     override fun didGetNudgs(nudgs: List<NudgViewModel>) {
         println("Got Nudgs successfully")
-
+        listener?.onNudgsRetrieved(nudgs)
     }
 
     override fun didFailToGetNudgs(exception: Exception) {

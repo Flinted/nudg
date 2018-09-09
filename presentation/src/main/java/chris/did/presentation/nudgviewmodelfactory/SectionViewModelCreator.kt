@@ -4,9 +4,9 @@ import chris.did.presentation.nudg.section.Section
 import chris.did.presentation.nudgviewmodel.sectionviewmodel.SectionViewModel
 
 /**
- * TagViewModelCreator
+ * SectionViewModelCreator
  */
-interface TagViewModelCreator {
+interface SectionViewModelCreator {
 
-    fun create(tags: List<Section>): List<SectionViewModel>
+    fun create(sections: List<Section>): List<SectionViewModel>
 }
