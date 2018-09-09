@@ -1,6 +1,7 @@
 package chris.did.nudg.injection.viewmodels
 
 import chris.did.nudg.overview.OverviewActivity
+import chris.did.nudg.overview.OverviewFragment
 import chris.did.nudg.overview.OverviewViewModelModule
 import dagger.Subcomponent
 
@@ -13,4 +14,5 @@ import dagger.Subcomponent
 interface ViewModelComponent {
 
     fun inject(overviewActivity: OverviewActivity)
+    fun inject(overviewFragment: OverviewFragment)
 }

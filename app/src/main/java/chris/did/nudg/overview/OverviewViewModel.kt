@@ -11,7 +11,6 @@ import chris.did.presentation.nudgviewmodel.NudgViewModel
 import chris.did.presentation.overview.OverviewPresentable
 import chris.did.presentation.overview.OverviewPresenterListener
 
-
 /**
  * OverviewViewModel
  */
@@ -59,7 +58,6 @@ class OverviewViewModel(
     override fun didSaveNudg() {
         nudgInput.set("")
         Toast.makeText(getApplication() as Context, "Nudg Saved :-)", Toast.LENGTH_LONG).show()
-        println("Saved successfully")
     }
 
     override fun didFailToSaveNudg() {

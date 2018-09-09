@@ -1,6 +1,6 @@
 package chris.did.presentation.nudg
 
-import chris.did.presentation.nudg.tag.Tag
+import chris.did.presentation.nudg.section.Section
 import java.util.*
 
 
@@ -9,6 +9,5 @@ import java.util.*
  */
 interface Nudg {
     val id: UUID
-    val text: String
-    val tags: List<Tag>
+    val sections: List<Section>
 }

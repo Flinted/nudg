@@ -2,8 +2,8 @@ package chris.did.nudg.injection.application
 
 import chris.did.presentation.nudgfactory.NudgCreator
 import chris.did.presentation.nudgfactory.NudgFactory
-import chris.did.presentation.nudgfactory.TagFactory
-import chris.did.presentation.nudgfactory.TagParser
+import chris.did.presentation.nudgfactory.SectionFactory
+import chris.did.presentation.nudgfactory.SectionParser
 import chris.did.presentation.nudgviewmodelfactory.NudgViewModelCreator
 import chris.did.presentation.nudgviewmodelfactory.NudgViewModelFactory
 import chris.did.presentation.nudgviewmodelfactory.TagViewModelCreator
@@ -18,12 +18,12 @@ import dagger.Provides
 class FactoryModule {
 
     @Provides
-    fun provideTagFactory(): TagParser {
-        return TagFactory(hashSetOf("MON"))
+    fun provideTagFactory(): SectionParser {
+        return SectionFactory(hashSetOf("MON"))
     }
 
     @Provides
-    fun provideNudgFactory(tagFactory: TagParser): NudgCreator {
+    fun provideNudgFactory(tagFactory: SectionParser): NudgCreator {
         return NudgFactory(tagFactory)
     }
 

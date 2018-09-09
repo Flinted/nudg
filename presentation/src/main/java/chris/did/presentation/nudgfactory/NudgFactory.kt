@@ -10,30 +10,31 @@ import java.util.*
 /**
  * NudgFactory
  */
-class NudgFactory(private val tagFactory: TagParser) : NudgCreator, NudgDataConverter {
+class NudgFactory(private val sectionFactory: SectionParser) : NudgCreator, NudgDataConverter {
 
     override fun createNewNudg(input: String): Nudg {
-        val tags = tagFactory.parseTags(input)
-        return UserNudg(UUID.randomUUID(), input, tags)
+        val sectionedString = StringParser.parseStringIntoSections(input)
+        val sections = sectionFactory.parseSections(sectionedString)
+        return UserNudg(UUID.randomUUID(), sections)
     }
 
     override fun convertToNudgData(nudg: Nudg): NudgData {
         val isDeleted = nudg is DeletedNudg
-        val tagData = (tagFactory as TagDataConverter).convertAllToTagData(nudg.tags)
+        val sectionData =
+            (sectionFactory as SectionDataConverter).convertAllToTagData(nudg.sections)
         return RealmNudgData(
             nudg.id.toString(),
-            nudg.text,
-            tagData,
+            sectionData,
             isDeleted
         )
     }
 
     override fun convertToNudg(data: NudgData): Nudg {
         val id = UUID.fromString(data.id)
-        val tags = (tagFactory as TagDataConverter).convertAllToTag(data.tags)
+        val sections = (sectionFactory as SectionDataConverter).convertAllToTag(data.tags)
         return when {
-            data.deleted -> DeletedNudg(id, data.text, tags)
-            else         -> UserNudg(id, data.text, tags)
+            data.deleted -> DeletedNudg(id, sections)
+            else         -> UserNudg(id, sections)
         }
     }
 }

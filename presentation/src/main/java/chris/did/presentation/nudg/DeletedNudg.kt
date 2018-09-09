@@ -1,6 +1,6 @@
 package chris.did.presentation.nudg
 
-import chris.did.presentation.nudg.tag.Tag
+import chris.did.presentation.nudg.section.Section
 import java.util.*
 
 /**
@@ -8,7 +8,5 @@ import java.util.*
  */
 data class DeletedNudg(
     override val id: UUID,
-    override val text: String,
-    override val tags: List<Tag>
-) : Nudg {
-}
+    override val sections: List<Section>
+) : Nudg

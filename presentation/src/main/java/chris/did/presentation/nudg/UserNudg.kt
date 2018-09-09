@@ -1,6 +1,6 @@
 package chris.did.presentation.nudg
 
-import chris.did.presentation.nudg.tag.Tag
+import chris.did.presentation.nudg.section.Section
 import java.util.*
 
 
@@ -9,6 +9,5 @@ import java.util.*
  */
 data class UserNudg(
     override val id: UUID,
-    override val text: String,
-    override val tags: List<Tag>
+    override val sections: List<Section>
 ) : Nudg

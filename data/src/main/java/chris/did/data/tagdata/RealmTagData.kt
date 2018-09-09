@@ -10,4 +10,4 @@ class RealmTagData(
     @PrimaryKey override val id: String,
     override val tag: String,
     override val type: String
-) : RealmModel, TagData
+) : RealmModel, SectionData

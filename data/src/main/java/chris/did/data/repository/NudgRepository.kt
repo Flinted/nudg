@@ -16,7 +16,7 @@ class NudgRepository : Repository {
         return listOf(
             RealmNudgData(
                 UUID.randomUUID().toString(),
-                "IT WORKS",
+                listOf("IT WORKS"),
                 listOf(),
                 false
             )
