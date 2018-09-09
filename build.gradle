@@ -4,7 +4,6 @@ buildscript {
     ext.kotlinVersion = '1.2.60'
     final gradleVersion = '3.1.4'
     final servicesVersion = '4.0.1'
-    final realmGradleVersion = '5.4.1'
 
     repositories {
         google()
@@ -15,7 +14,6 @@ buildscript {
         classpath "com.android.tools.build:gradle:$gradleVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "com.google.gms:google-services:$servicesVersion"
-        classpath "io.realm:realm-gradle-plugin:$realmGradleVersion"
     }
 }
 

@@ -1,46 +1,50 @@
 package chris.did.data.repository
 
-import chris.did.data.nudgdata.NudgData
-import chris.did.data.nudgdata.RealmNudgData
-import chris.did.data.tagdata.RealmSectionData
-import java.util.*
+import android.content.Context
+import chris.did.data.room.NudgDatabase
+import chris.did.data.room.nudgdata.RoomNudgData
 
 /**
  * NudgRepository
  */
-class NudgRepository : Repository {
+class NudgRepository(context: Context) : Repository {
 
-    override fun postNudg(nudgData: NudgData) {
+    private val database = NudgDatabase.getInstance(context)
+
+    override fun postNudg(nudgData: RoomNudgData) {
+        val roomNudgData = nudgData as? RoomNudgData ?: return
+        database?.nudgDao()?.insert(roomNudgData)
     }
 
-    override fun getNudgs(): List<NudgData> {
-        return listOf(
-            RealmNudgData(
-                UUID.randomUUID().toString(),
-                listOf(
-                    RealmSectionData(UUID.randomUUID().toString(), "Testing ", "STRING"),
-                    RealmSectionData(UUID.randomUUID().toString(), "#tags", "USER"),
-                    RealmSectionData(UUID.randomUUID().toString(), " as well as ", "STRING"),
-                    RealmSectionData(UUID.randomUUID().toString(), "#2013/10/14", "DATE"),
-                    RealmSectionData(UUID.randomUUID().toString(), " ", "STRING"),
-                    RealmSectionData(UUID.randomUUID().toString(), "#MON", "SYSTEM"),
-                    RealmSectionData(
-                        UUID.randomUUID().toString(),
-                        ", It's actually worked ",
-                        "STRING"
-                    ),
-                    RealmSectionData(UUID.randomUUID().toString(), "#WOOO!", "USER")
-                ),
-                false
-            )
-        )
+    override fun getNudgs(): List<RoomNudgData> {
+        return database?.nudgDao()?.getAll() ?: listOf()
+//        return listOf(
+//            RoomNudgData(
+//                UUID.randomUUID().toString(),
+//                listOf(
+//                    RoomSectionData(UUID.randomUUID().toString(), "Testing ", "STRING"),
+//                    RoomSectionData(UUID.randomUUID().toString(), "#tags", "USER"),
+//                    RoomSectionData(UUID.randomUUID().toString(), " as well as ", "STRING"),
+//                    RoomSectionData(UUID.randomUUID().toString(), "#2013/10/14", "DATE"),
+//                    RoomSectionData(UUID.randomUUID().toString(), " ", "STRING"),
+//                    RoomSectionData(UUID.randomUUID().toString(), "#MON", "SYSTEM"),
+//                    RoomSectionData(
+//                        UUID.randomUUID().toString(),
+//                        ", It's actually worked ",
+//                        "STRING"
+//                    ),
+//                    RoomSectionData(UUID.randomUUID().toString(), "#WOOO!", "USER")
+//                ),
+//                false
+//            )
+//        )
     }
 
-    override fun getNudgById(id: String): NudgData {
+    override fun getNudgById(id: String): RoomNudgData {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getNudgsByIds(vararg ids: String): List<NudgData> {
+    override fun getNudgsByIds(vararg ids: String): List<RoomNudgData> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

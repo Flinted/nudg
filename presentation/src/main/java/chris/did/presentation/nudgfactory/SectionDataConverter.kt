@@ -1,15 +1,16 @@
 package chris.did.presentation.nudgfactory
 
-import chris.did.data.tagdata.SectionData
+import chris.did.data.room.sectiondata.RoomSectionData
 import chris.did.presentation.nudg.section.Section
+import java.util.*
 
 /**
  * SectionDataConverter
  */
 interface SectionDataConverter {
 
-    fun convertToTagData(tag: Section): SectionData
-    fun convertAllToTagData(tags: List<Section>): List<SectionData>
-    fun convertToTag(data: SectionData): Section
-    fun convertAllToTag(data: List<SectionData>): List<Section>
+    fun convertToTagData(tag: Section): RoomSectionData
+    fun convertAllToTagData(tags: List<Section>): ArrayList<RoomSectionData>
+    fun convertToTag(data: RoomSectionData): Section
+    fun convertAllToTag(data: ArrayList<RoomSectionData>): List<Section>
 }

@@ -1,13 +1,13 @@
 package chris.did.presentation.nudgfactory
 
-import chris.did.data.tagdata.RealmSectionData
-import chris.did.data.tagdata.SectionData
+import chris.did.data.room.sectiondata.RoomSectionData
 import chris.did.presentation.nudg.section.*
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.temporal.TemporalAdjusters
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * SectionFactory
@@ -22,26 +22,26 @@ class SectionFactory(private val systemTags: HashSet<String>) : SectionParser,
         private val STRING_TYPE = "STRING"
     }
 
-    override fun parseSections(input: List<String>): List<Section> {
-        if (input.isEmpty()) return listOf()
+    override fun parseSections(input: List<String>): MutableList<Section> {
+        if (input.isEmpty()) return mutableListOf()
         val tags = extractTags(input)
         return when {
-            tags.isEmpty() -> listOf(SystemTagSection(UUID.randomUUID(), "NoTag"))
+            tags.isEmpty() -> mutableListOf(SystemTagSection(UUID.randomUUID(), "NoTag"))
             else           -> tags
         }
     }
 
-    override fun convertToTagData(tag: Section): SectionData {
+    override fun convertToTagData(tag: Section): RoomSectionData {
         val type = when (tag) {
             is DateTagSection   -> DATE_TYPE
             is SystemTagSection -> SYSTEM_TYPE
             is UserTagSection   -> USER_TYPE
             else                -> STRING_TYPE
         }
-        return RealmSectionData(tag.id.toString(), tag.value, type)
+        return RoomSectionData(tag.id.toString(), tag.value, type)
     }
 
-    override fun convertToTag(data: SectionData): Section {
+    override fun convertToTag(data: RoomSectionData): Section {
         val id = UUID.fromString(data.id)
         return when (data.type) {
             DATE_TYPE   -> DateTagSection(id, data.tag)
@@ -52,13 +52,13 @@ class SectionFactory(private val systemTags: HashSet<String>) : SectionParser,
     }
 
     override fun convertAllToTagData(tags: List<Section>) =
-        tags.map { tag -> convertToTagData(tag) }
+        ArrayList(tags.map { tag -> convertToTagData(tag) })
 
-    override fun convertAllToTag(data: List<SectionData>) =
+    override fun convertAllToTag(data: ArrayList<RoomSectionData>) =
         data.map { tagData -> convertToTag(tagData) }
 
-    private fun extractTags(input: List<String>): List<Section> {
-        return input.map { section -> createTag(UUID.randomUUID(), section) }.toList()
+    private fun extractTags(input: List<String>): MutableList<Section> {
+        return input.map { section -> createTag(UUID.randomUUID(), section) }.toMutableList()
     }
 
     private fun createTag(id: UUID, tagValue: String) = when {
@@ -83,11 +83,11 @@ class SectionFactory(private val systemTags: HashSet<String>) : SectionParser,
             SystemTags.SUN      -> DayOfWeek.SUNDAY
             else                -> dateNow.dayOfWeek
         }
-        val dateTag = getNextOccurenceOfDay(dateNow, dayId)
+        val dateTag = getNextOccurrenceOfDay(dateNow, dayId)
         return DateTagSection(id, dateTag)
     }
 
-    private fun getNextOccurenceOfDay(dateNow: LocalDate, dayId: DayOfWeek): String {
+    private fun getNextOccurrenceOfDay(dateNow: LocalDate, dayId: DayOfWeek): String {
         val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd")
         val adjustedDate = dateNow.with(TemporalAdjusters.next(dayId))
         return "#${adjustedDate.format(formatter)}"

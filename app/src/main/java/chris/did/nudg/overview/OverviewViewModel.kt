@@ -53,7 +53,10 @@ class OverviewViewModel(
     }
 
     override fun didGetNudgs(nudgs: List<NudgViewModel>) {
-        println("Got Nudgs successfully")
+        if (nudgs.isEmpty()) {
+            listener?.onNoNudgsFound()
+            return
+        }
         listener?.onNudgsRetrieved(nudgs)
     }
 
@@ -63,6 +66,7 @@ class OverviewViewModel(
     override fun didSaveNudg() {
         nudgInput.set("")
         Toast.makeText(getApplication() as Context, "Nudg Saved :-)", Toast.LENGTH_LONG).show()
+        getNudgs()
     }
 
     override fun didFailToSaveNudg() {

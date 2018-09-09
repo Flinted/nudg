@@ -1,6 +1,6 @@
 package chris.did.presentation.nudgfactory
 
-import chris.did.data.nudgdata.NudgData
+import chris.did.data.room.nudgdata.RoomNudgData
 import chris.did.presentation.nudg.Nudg
 
 /**
@@ -8,6 +8,6 @@ import chris.did.presentation.nudg.Nudg
  */
 interface NudgDataConverter {
 
-    fun convertToNudgData(nudg: Nudg): NudgData
-    fun convertToNudg(data: NudgData): Nudg
+    fun convertToNudgData(nudg: Nudg): RoomNudgData
+    fun convertToNudg(data: RoomNudgData): Nudg
 }

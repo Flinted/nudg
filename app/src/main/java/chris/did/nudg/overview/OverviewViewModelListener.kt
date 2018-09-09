@@ -8,4 +8,5 @@ import chris.did.presentation.nudgviewmodel.NudgViewModel
 interface OverviewViewModelListener {
 
     fun onNudgsRetrieved(nudgs: List<NudgViewModel>)
+    fun onNoNudgsFound()
 }

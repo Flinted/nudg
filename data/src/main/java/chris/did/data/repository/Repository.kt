@@ -1,16 +1,16 @@
 package chris.did.data.repository
 
-import chris.did.data.nudgdata.NudgData
+import chris.did.data.room.nudgdata.RoomNudgData
 
 /**
  * Repository
  */
 interface Repository {
-    fun postNudg(nudgData: NudgData)
+    fun postNudg(nudgData: RoomNudgData)
 
-    fun getNudgs(): List<NudgData>
-    fun getNudgById(id: String): NudgData
-    fun getNudgsByIds(vararg ids: String): List<NudgData>
+    fun getNudgs(): List<RoomNudgData>
+    fun getNudgById(id: String): RoomNudgData
+    fun getNudgsByIds(vararg ids: String): List<RoomNudgData>
 
     fun patchNudg(nudgPatch: String)
 

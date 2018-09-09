@@ -1,6 +1,6 @@
-package chris.did.data.nudgdata
+package chris.did.data.room.nudgdata
 
-import chris.did.data.tagdata.SectionData
+import chris.did.data.room.sectiondata.SectionData
 
 /**
  * NudgData

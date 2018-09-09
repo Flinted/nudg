@@ -1,7 +1,7 @@
 package chris.did.data.nudgservice
 
-import chris.did.data.nudgdata.NudgData
 import chris.did.data.repository.Repository
+import chris.did.data.room.nudgdata.RoomNudgData
 
 /**
  * NudgService
@@ -9,6 +9,5 @@ import chris.did.data.repository.Repository
 class NudgService(private val repository: Repository) : NudgServicable {
 
     override fun getNudgs() = repository.getNudgs()
-
-    override fun postNudg(nudgData: NudgData) = repository.postNudg(nudgData)
+    override fun postNudg(nudgData: RoomNudgData) = repository.postNudg(nudgData)
 }

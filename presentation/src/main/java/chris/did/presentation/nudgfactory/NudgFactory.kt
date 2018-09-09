@@ -1,10 +1,10 @@
 package chris.did.presentation.nudgfactory
 
-import chris.did.data.nudgdata.NudgData
-import chris.did.data.nudgdata.RealmNudgData
+import chris.did.data.room.nudgdata.RoomNudgData
 import chris.did.presentation.nudg.DeletedNudg
 import chris.did.presentation.nudg.Nudg
 import chris.did.presentation.nudg.UserNudg
+import chris.did.presentation.nudg.section.SystemTagSection
 import java.util.*
 
 /**
@@ -15,23 +15,26 @@ class NudgFactory(private val sectionFactory: SectionParser) : NudgCreator, Nudg
     override fun createNewNudg(input: String): Nudg {
         val sectionedString = StringParser.parseStringIntoSections(input)
         val sections = sectionFactory.parseSections(sectionedString)
-        return UserNudg(UUID.randomUUID(), sections)
+        if (!input.contains("#")) {
+             sections.add(SystemTagSection(UUID.randomUUID(), " #NoTag"))
+        }
+        return UserNudg(UUID.randomUUID(), sections.toList())
     }
 
-    override fun convertToNudgData(nudg: Nudg): NudgData {
+    override fun convertToNudgData(nudg: Nudg): RoomNudgData {
         val isDeleted = nudg is DeletedNudg
         val sectionData =
             (sectionFactory as SectionDataConverter).convertAllToTagData(nudg.sections)
-        return RealmNudgData(
+        return RoomNudgData(
             nudg.id.toString(),
             sectionData,
             isDeleted
         )
     }
 
-    override fun convertToNudg(data: NudgData): Nudg {
+    override fun convertToNudg(data: RoomNudgData): Nudg {
         val id = UUID.fromString(data.id)
-        val sections = (sectionFactory as SectionDataConverter).convertAllToTag(data.tags)
+        val sections = (sectionFactory as SectionDataConverter).convertAllToTag(data.sections)
         return when {
             data.deleted -> DeletedNudg(id, sections)
             else         -> UserNudg(id, sections)

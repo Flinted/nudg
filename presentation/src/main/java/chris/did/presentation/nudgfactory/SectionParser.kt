@@ -7,5 +7,5 @@ import chris.did.presentation.nudg.section.Section
  */
 interface SectionParser {
 
-    fun parseSections(input: List<String>): List<Section>
+    fun parseSections(input: List<String>): MutableList<Section>
 }

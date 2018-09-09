@@ -1,5 +1,6 @@
 package chris.did.nudg.injection.application
 
+import android.content.Context
 import chris.did.data.nudgservice.NudgServicable
 import chris.did.data.nudgservice.NudgService
 import chris.did.data.repository.NudgRepository
@@ -15,8 +16,8 @@ import dagger.Provides
 class UseCaseModule {
 
     @Provides
-    fun provideNudgRepository(): Repository {
-        return NudgRepository()
+    fun provideNudgRepository(context: Context): Repository {
+        return NudgRepository(context)
     }
 
     @Provides

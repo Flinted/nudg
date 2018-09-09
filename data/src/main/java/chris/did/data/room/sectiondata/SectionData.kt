@@ -1,4 +1,4 @@
-package chris.did.data.tagdata
+package chris.did.data.room.sectiondata
 
 /**
  * SectionData
