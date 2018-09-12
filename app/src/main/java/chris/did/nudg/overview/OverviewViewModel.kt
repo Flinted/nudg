@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import chris.did.nudg.base.BaseApplication
 import chris.did.nudg.base.BaseViewModel
+import chris.did.presentation.nudgfactory.StringParser
 import chris.did.presentation.nudgviewmodel.NudgViewModel
 import chris.did.presentation.overview.OverviewPresentable
 import chris.did.presentation.overview.OverviewPresenterListener
@@ -34,6 +35,10 @@ class OverviewViewModel(
     override fun nudgInputChanged(input: CharSequence) {
         if (input.toString() == nudgInput.get()) {
             return
+        }
+        val tags = StringParser.parseStringIntoSections(input.toString())
+        if (tags.isNotEmpty()) {
+            listener?.onNudgSearchValuesChanged(tags.first())
         }
         nudgInput.set(input.toString())
     }
@@ -70,5 +75,14 @@ class OverviewViewModel(
     }
 
     override fun didFailToSaveNudg() {
+    }
+
+    override fun onNudgInputTapped(view: View) {
+        listener?.onNudgInputBegun()
+    }
+
+    override fun onNudgInputLongPressed(view: View) {
+        val currentText = nudgInput.get()
+        nudgInput.set("$currentText#")
     }
 }

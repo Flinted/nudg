@@ -1,6 +1,5 @@
 package chris.did.presentation.nudgviewmodel.sectionviewmodel
 
-import android.text.SpannableString
 import java.util.*
 
 /**
@@ -9,5 +8,5 @@ import java.util.*
 interface SectionViewModel {
 
     fun getId(): UUID
-    fun getFormattedValue(): SpannableString
+    fun getFormattedValue(): String
 }

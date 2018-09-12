@@ -1,6 +1,5 @@
 package chris.did.presentation.nudgviewmodel
 
-import android.text.SpannableStringBuilder
 import chris.did.presentation.nudgviewmodel.sectionviewmodel.SectionViewModel
 import java.util.*
 
@@ -10,6 +9,8 @@ import java.util.*
 interface NudgViewModel {
 
     fun getId(): UUID
-    fun getBuiltText(): SpannableStringBuilder
+    fun getBuiltText(): String
+    fun getNotes(): String
     fun getSections(): List<SectionViewModel>
+    fun getSectionsText(): String
 }

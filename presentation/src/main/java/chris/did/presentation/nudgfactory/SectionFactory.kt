@@ -1,60 +1,60 @@
 package chris.did.presentation.nudgfactory
 
-import chris.did.data.room.sectiondata.RoomSectionData
-import chris.did.presentation.nudg.section.*
+import chris.did.data.room.sectiondata.RealmSectionData
+import chris.did.presentation.nudg.section.DateTagSection
+import chris.did.presentation.nudg.section.Section
+import chris.did.presentation.nudg.section.SystemTagSection
+import chris.did.presentation.nudg.section.UserTagSection
+import io.realm.RealmList
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.temporal.TemporalAdjusters
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * SectionFactory
  */
-class SectionFactory(private val systemTags: HashSet<String>) : SectionParser,
-    SectionDataConverter {
+class SectionFactory(private val systemTags: HashSet<String>) : SectionParser {
 
     companion object {
         private val DATE_TYPE = "DATE"
         private val SYSTEM_TYPE = "SYSTEM"
         private val USER_TYPE = "USER"
-        private val STRING_TYPE = "STRING"
     }
 
-    override fun parseSections(input: List<String>): MutableList<Section> {
+    override fun parseSections(input: String): MutableList<Section> {
         if (input.isEmpty()) return mutableListOf()
-        val tags = extractTags(input)
+        val tagSections = StringParser.parseStringIntoSections(input)
+        val tags = extractTags(tagSections)
         return when {
-            tags.isEmpty() -> mutableListOf(SystemTagSection(UUID.randomUUID(), "NoTag"))
+            tags.isEmpty() -> mutableListOf(SystemTagSection(UUID.randomUUID(), SystemTags.NO_TAG))
             else           -> tags
         }
     }
 
-    override fun convertToTagData(tag: Section): RoomSectionData {
+    override fun convertToTagData(tag: Section): RealmSectionData {
         val type = when (tag) {
             is DateTagSection   -> DATE_TYPE
             is SystemTagSection -> SYSTEM_TYPE
-            is UserTagSection   -> USER_TYPE
-            else                -> STRING_TYPE
+            else                -> USER_TYPE
         }
-        return RoomSectionData(tag.id.toString(), tag.value, type)
+        return RealmSectionData(tag.id.toString(), tag.value, type)
     }
 
-    override fun convertToTag(data: RoomSectionData): Section {
+    override fun convertToTag(data: RealmSectionData): Section {
         val id = UUID.fromString(data.id)
         return when (data.type) {
             DATE_TYPE   -> DateTagSection(id, data.tag)
             SYSTEM_TYPE -> SystemTagSection(id, data.tag)
-            USER_TYPE   -> UserTagSection(id, data.tag)
-            else        -> StringSection(id, data.tag)
+            else        -> UserTagSection(id, data.tag)
         }
     }
 
     override fun convertAllToTagData(tags: List<Section>) =
-        ArrayList(tags.map { tag -> convertToTagData(tag) })
+        tags.flatMapTo(RealmList<RealmSectionData>()) { section -> listOf(convertToTagData(section)) }
 
-    override fun convertAllToTag(data: ArrayList<RoomSectionData>) =
+    override fun convertAllToTag(data: List<RealmSectionData>) =
         data.map { tagData -> convertToTag(tagData) }
 
     private fun extractTags(input: List<String>): MutableList<Section> {
@@ -64,11 +64,17 @@ class SectionFactory(private val systemTags: HashSet<String>) : SectionParser,
     private fun createTag(id: UUID, tagValue: String) = when {
         systemTags.contains(tagValue)    -> createSystemTag(id, tagValue)
         StringParser.isDateTag(tagValue) -> DateTagSection(id, tagValue)
-        StringParser.isTag(tagValue)     -> UserTagSection(id, tagValue)
-        else                             -> StringSection(id, tagValue)
+        else                             -> UserTagSection(id, tagValue)
     }
 
     private fun createSystemTag(id: UUID, tagValue: String): Section {
+        if (tagValue == SystemTags.DELETED) {
+            return SystemTagSection(id, tagValue)
+        }
+        return createSystemDateTag(id, tagValue)
+    }
+
+    private fun createSystemDateTag(id: UUID, tagValue: String): DateTagSection {
         val dateNow = LocalDate.now()
         dateNow.dayOfWeek.value
         val dayId = when (tagValue) {
@@ -95,15 +101,16 @@ class SectionFactory(private val systemTags: HashSet<String>) : SectionParser,
 }
 
 object SystemTags {
-    val NO_TAG = "#NoTag"
-    val TODAY = "#Today"
-    val TOMORROW = "#Tomorrow"
-    val MON = "#MON"
-    val TUE = "#TUE"
-    val WED = "#WED"
-    val THU = "#THU"
-    val FRI = "#FRI"
-    val SAT = "#SAT"
-    val SUN = "#SUN"
-    val TAGS = hashSetOf(NO_TAG, TODAY, TOMORROW, MON, TUE, WED, THU, FRI, SAT, SUN)
+    val DELETED = "#deleted"
+    val NO_TAG = "#notag"
+    val TODAY = "#today"
+    val TOMORROW = "#tomorrow"
+    val MON = "#monday"
+    val TUE = "#tuesday"
+    val WED = "#wednesday"
+    val THU = "#thursday"
+    val FRI = "#friday"
+    val SAT = "#saturday"
+    val SUN = "#sunday"
+    val TAGS = hashSetOf(DELETED, NO_TAG, TODAY, TOMORROW, MON, TUE, WED, THU, FRI, SAT, SUN)
 }

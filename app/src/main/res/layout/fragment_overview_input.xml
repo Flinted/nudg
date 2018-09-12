@@ -16,29 +16,27 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/overview_constraint"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimary">
+        android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/overview_nudg_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/overview_nudg_input"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="parent" />
 
         <EditText
             android:id="@+id/overview_nudg_input"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginBottom="12dp"
-            android:layout_marginEnd="45dp"
-            android:layout_marginStart="12dp"
+            android:layout_height="0dp"
+            android:layout_margin="12dp"
             android:background="@color/colorPrimary"
-            android:onClick="@{viewModel::onNudgInputTapped}"
             android:onTextChanged="@{(text, start, before, count) -> viewModel.nudgInputChanged(text)}"
             android:text="@{viewModel.nudgInput}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             nudgInput:validWhen="@{viewModel.inputValid}" />
 
         <android.support.design.widget.FloatingActionButton
@@ -48,9 +46,8 @@
             android:layout_marginEnd="12dp"
             android:background="@color/colorPrimaryDark"
             android:onClick="@{viewModel::onSaveNudgTapped}"
-            app:layout_constraintBottom_toBottomOf="@id/overview_nudg_input"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/overview_nudg_input" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

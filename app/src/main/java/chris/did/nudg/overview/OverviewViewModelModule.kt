@@ -27,7 +27,7 @@ class OverviewViewModelModule {
     }
 
     @Provides
-    fun provideSaveNudhUseCase(
+    fun provideSaveNudgUseCase(
         nudgFactory: NudgCreator,
         nudgServicable: NudgServicable
     ): SaveNudgUseCase {

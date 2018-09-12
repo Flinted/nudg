@@ -16,4 +16,6 @@ interface OverviewViewModellable {
     fun nudgInputChanged(input: CharSequence)
     fun getNudgs()
     fun onSaveNudgTapped(view: View)
+    fun onNudgInputTapped(view: View)
+    fun onNudgInputLongPressed(view: View)
 }

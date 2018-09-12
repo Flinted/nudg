@@ -4,6 +4,7 @@ import android.content.Context
 import chris.did.nudg.base.BaseApplication
 import dagger.Module
 import dagger.Provides
+import io.realm.Realm
 import kotlinx.coroutines.experimental.android.UI
 import kotlin.coroutines.experimental.CoroutineContext
 
@@ -29,5 +30,11 @@ class ApplicationModule(private val application: BaseApplication) {
     @ApplicationScope
     fun context(): Context {
         return application.applicationContext
+    }
+
+    @Provides
+    @ApplicationScope
+    fun provideRealm(): Realm {
+        return Realm.getDefaultInstance()
     }
 }

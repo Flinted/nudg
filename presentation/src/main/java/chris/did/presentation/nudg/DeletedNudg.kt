@@ -8,5 +8,7 @@ import java.util.*
  */
 data class DeletedNudg(
     override val id: UUID,
+    override val text: String,
+    override val notes: String,
     override val sections: List<Section>
 ) : Nudg

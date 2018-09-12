@@ -9,5 +9,7 @@ import java.util.*
  */
 interface Nudg {
     val id: UUID
+    val text: String
+    val notes: String
     val sections: List<Section>
 }

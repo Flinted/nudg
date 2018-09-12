@@ -7,6 +7,11 @@ import chris.did.nudg.base.BaseActivity
 /**
  * OverviewActivity
  */
+
+interface OverviewBackPressListener {
+    fun handleBackPressEvent(): Boolean
+}
+
 class OverviewActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

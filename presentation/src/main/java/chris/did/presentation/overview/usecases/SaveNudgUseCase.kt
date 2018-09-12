@@ -2,7 +2,6 @@ package chris.did.presentation.overview.usecases
 
 import chris.did.data.nudgservice.NudgServicable
 import chris.did.presentation.nudgfactory.NudgCreator
-import chris.did.presentation.nudgfactory.NudgDataConverter
 import chris.did.presentation.overview.usecases.SaveNudgUseCase.Params
 import chris.did.presentation.usecase.Either
 import chris.did.presentation.usecase.Either.Fail
@@ -11,6 +10,7 @@ import chris.did.presentation.usecase.Failure
 import chris.did.presentation.usecase.Failure.CannotSaveNudgFailure
 import chris.did.presentation.usecase.UseCase
 import chris.did.presentation.usecase.UseCase.None
+import io.realm.Realm
 
 /**
  * SaveNudgUseCase
@@ -24,9 +24,9 @@ class SaveNudgUseCase(
 
     override suspend fun run(params: Params): Either<Failure, None> {
         val nudg = nudgFactory.createNewNudg(params.nudgInput)
-        val nudgData = (nudgFactory as NudgDataConverter).convertToNudgData(nudg)
+        val nudgData = nudgFactory.convertToNudgData(nudg)
         return try {
-            nudgService.postNudg(nudgData)
+            nudgService.postNudg(nudgData, Realm.getDefaultInstance())
             Success(None())
         } catch (exception: Exception) {
             Fail(CannotSaveNudgFailure())

@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -25,7 +26,6 @@ android {
 
 dependencies {
 
-    final ROOM_VERSION = "1.1.1"
     // GSON
     implementation libs.gson
 
@@ -40,10 +40,6 @@ dependencies {
     //RXJava
     implementation libs.rxJava
     implementation libs.rxAndroid
-
-    // Room
-    implementation "android.arch.persistence.room:runtime:$ROOM_VERSION"
-    kapt "android.arch.persistence.room:compiler:$ROOM_VERSION"
 
     // Project Modules
     implementation fileTree(dir: 'libs', include: ['*.jar'])

@@ -9,5 +9,7 @@ import java.util.*
  */
 data class UserNudg(
     override val id: UUID,
+    override val text: String,
+    override val notes: String,
     override val sections: List<Section>
 ) : Nudg

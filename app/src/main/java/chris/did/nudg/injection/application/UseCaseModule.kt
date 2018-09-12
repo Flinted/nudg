@@ -1,9 +1,8 @@
 package chris.did.nudg.injection.application
 
-import android.content.Context
 import chris.did.data.nudgservice.NudgServicable
 import chris.did.data.nudgservice.NudgService
-import chris.did.data.repository.NudgRepository
+import chris.did.data.repository.RealmNudgRepository
 import chris.did.data.repository.Repository
 import dagger.Module
 import dagger.Provides
@@ -16,8 +15,8 @@ import dagger.Provides
 class UseCaseModule {
 
     @Provides
-    fun provideNudgRepository(context: Context): Repository {
-        return NudgRepository(context)
+    fun provideNudgRepository(): Repository {
+        return RealmNudgRepository()
     }
 
     @Provides

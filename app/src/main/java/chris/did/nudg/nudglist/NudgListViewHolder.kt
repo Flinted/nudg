@@ -1,11 +1,12 @@
 package chris.did.nudg.nudglist
 
+import android.databinding.ViewDataBinding
 import android.support.v7.widget.RecyclerView
-import chris.did.nudg.databinding.ListElementNudgBinding
 
 /**
  * NudgListViewHolder
  */
-class NudgListViewHolder(internal val binding: ListElementNudgBinding) : RecyclerView.ViewHolder(binding.root) {
-
+class NudgListViewHolder(val binding: ViewDataBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 }
+

@@ -10,6 +10,8 @@ import chris.did.nudg.injection.viewmodels.ActivityModule
 import chris.did.nudg.overview.OverviewViewModelModule
 import com.crashlytics.android.Crashlytics
 import io.fabric.sdk.android.Fabric
+import io.realm.Realm
+import io.realm.RealmConfiguration
 
 /**
  * BaseApplication
@@ -21,6 +23,14 @@ class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         initialiseFabric()
+        initialiseRealm()
+    }
+
+    private fun initialiseRealm() {
+        Realm.init(this)
+        val realmConfiguration = RealmConfiguration.Builder()
+            .build()
+        Realm.setDefaultConfiguration(realmConfiguration)
     }
 
     @UiThread

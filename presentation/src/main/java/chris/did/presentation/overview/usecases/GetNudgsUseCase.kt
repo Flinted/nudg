@@ -3,7 +3,6 @@ package chris.did.presentation.overview.usecases
 import chris.did.data.nudgservice.NudgServicable
 import chris.did.presentation.nudg.Nudg
 import chris.did.presentation.nudgfactory.NudgCreator
-import chris.did.presentation.nudgfactory.NudgDataConverter
 import chris.did.presentation.usecase.Either
 import chris.did.presentation.usecase.Either.Success
 import chris.did.presentation.usecase.Failure
@@ -20,8 +19,7 @@ class GetNudgsUseCase(
 
     override suspend fun run(params: None): Either<Failure, List<Nudg>> {
         val nudgData = nudgService.getNudgs()
-        val converter = nudgFactory as NudgDataConverter
-        val nudgs = nudgData.map { data -> converter.convertToNudg(data) }
+        val nudgs = nudgData.map { data -> nudgFactory.convertToNudg(data) }
         return Success(nudgs)
     }
 }
