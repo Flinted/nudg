@@ -36,7 +36,7 @@ class NudgDetailViewModel(
 
     // NudgDetailPresenterListener
     override fun onGetNudgFailure(exception: Exception) {
-
+        //Notify listener of failure to show toast
     }
 
     override fun onGetNudgSuccess(nudgViewModel: NudgViewModel) {
