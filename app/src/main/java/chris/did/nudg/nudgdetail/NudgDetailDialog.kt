@@ -34,6 +34,11 @@ class NudgDetailDialog : BaseDialog() {
     lateinit var factory: ViewModelFactory<NudgDetailViewModel>
     private lateinit var binding: DialogNudgDetailBinding
 
+
+    override fun getTheme(): Int {
+        return R.style.AppTheme_NoActionBar_FullScreenDialog
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getViewModelComponent().inject(this)
