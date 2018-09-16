@@ -7,6 +7,7 @@ import chris.did.nudg.BuildConfig
 import chris.did.nudg.analytics.Analytics
 import chris.did.nudg.injection.application.*
 import chris.did.nudg.injection.viewmodels.ActivityModule
+import chris.did.nudg.nudgdetail.NudgDetailViewModelModule
 import chris.did.nudg.overview.OverviewViewModelModule
 import com.crashlytics.android.Crashlytics
 import io.fabric.sdk.android.Fabric
@@ -53,7 +54,8 @@ class BaseApplication : Application() {
     private fun createViewModelComponent(activity: Activity) = getApplicationComponent()
         .getViewModelComponent(
             ActivityModule(activity),
-            OverviewViewModelModule()
+            OverviewViewModelModule(),
+            NudgDetailViewModelModule()
         )
 
     private fun initialiseFabric() {

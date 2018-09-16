@@ -8,5 +8,6 @@ import chris.did.presentation.nudgviewmodel.NudgViewModel
  */
 interface NudgViewModelCreator {
 
+    fun create(nudg: Nudg): NudgViewModel
     fun create(nudgs: List<Nudg>): List<NudgViewModel>
 }

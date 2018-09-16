@@ -3,6 +3,7 @@ package chris.did.nudg.injection.application
 import chris.did.nudg.base.BaseApplication
 import chris.did.nudg.injection.viewmodels.ActivityModule
 import chris.did.nudg.injection.viewmodels.ViewModelComponent
+import chris.did.nudg.nudgdetail.NudgDetailViewModelModule
 import chris.did.nudg.overview.OverviewViewModelModule
 import dagger.Component
 
@@ -23,6 +24,7 @@ interface ApplicationComponent {
 
     fun getViewModelComponent(
         viewModelModule: ActivityModule,
-        overviewViewModelModule: OverviewViewModelModule
+        overviewViewModelModule: OverviewViewModelModule,
+        nudgDetailViewModelModule: NudgDetailViewModelModule
     ): ViewModelComponent
 }

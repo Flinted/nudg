@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.support.constraint.ConstraintSet
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,15 +15,17 @@ import chris.did.nudg.base.BaseActivity
 import chris.did.nudg.base.BaseFragment
 import chris.did.nudg.databinding.FragmentOverviewBinding
 import chris.did.nudg.injection.viewmodels.ViewModelFactory
+import chris.did.nudg.nudgdetail.NudgDetailDialog
 import chris.did.nudg.nudglist.NudgListAdapter
-import chris.did.nudg.nudglist.SwipeDetector
+import chris.did.nudg.nudglist.NudgListAdapterListener
 import chris.did.presentation.nudgviewmodel.NudgViewModel
+import java.util.*
 import javax.inject.Inject
 
 /**
  * OverviewFragment
  */
-class OverviewFragment : BaseFragment(), OverviewViewModelListener, OverviewBackPressListener {
+class OverviewFragment : BaseFragment(), OverviewViewModelListener, OverviewBackPressListener, NudgListAdapterListener {
 
     companion object {
         fun newInstance(): OverviewFragment {
@@ -61,10 +62,10 @@ class OverviewFragment : BaseFragment(), OverviewViewModelListener, OverviewBack
     }
 
     override fun onNudgsRetrieved(nudgs: List<NudgViewModel>) {
-        val adapter = NudgListAdapter(nudgs)
+        val adapter = NudgListAdapter(nudgs, this)
         val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(requireContext())
-        val swipeDetector = SwipeDetector()
-        ItemTouchHelper(swipeDetector).attachToRecyclerView(binding.overviewNudgList)
+//        val swipeDetector = SwipeDetector()
+//        ItemTouchHelper(swipeDetector).attachToRecyclerView(binding.overviewNudgList)
         binding.overviewNudgList.layoutManager = layoutManager
         binding.overviewNudgList.adapter = adapter
     }
@@ -86,5 +87,16 @@ class OverviewFragment : BaseFragment(), OverviewViewModelListener, OverviewBack
         originalConstraint.applyTo(binding.overviewConstraint)
         currentConstraintSet = originalConstraint
         return true
+    }
+
+    // NudgListAdapterListener
+
+    override fun onNudgSelected(id: UUID) {
+        val dialog = NudgDetailDialog.createInstance(id)
+        dialog.show(activity?.supportFragmentManager, "test")
+    }
+
+    override fun onTagSelected(id: UUID) {
+
     }
 }

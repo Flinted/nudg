@@ -7,13 +7,14 @@ import chris.did.presentation.nudgviewmodel.NudgViewModel
  * NudgListFilter
  */
 
-interface NudgFilterCallback {
+interface NudgFilterListener {
+
     fun didFilter(filtered: List<NudgViewModel>)
 }
 
 class NudgListFilter(
     private var original: List<NudgViewModel>,
-    private var callback: NudgFilterCallback
+    private var listener: NudgFilterListener
 ) :
     Filter() {
     override fun performFiltering(constraint: CharSequence): FilterResults {
@@ -29,12 +30,11 @@ class NudgListFilter(
             return original
         }
         return original.filter { nudg ->
-            nudg.getBuiltText().toString().toLowerCase()
-                .contains(constraint.toString().toLowerCase())
+            nudg.getBuiltText().toLowerCase().contains(constraint.toString().toLowerCase())
         }
     }
 
     override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
-        callback.didFilter(p1?.values as List<NudgViewModel>)
+        listener.didFilter(p1?.values as List<NudgViewModel>)
     }
 }
