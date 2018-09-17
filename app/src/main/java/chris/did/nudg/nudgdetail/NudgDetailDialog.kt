@@ -21,6 +21,7 @@ private const val ID_KEY = "id"
 class NudgDetailDialog : BaseDialog() {
 
     companion object {
+        
         fun createInstance(id: UUID): NudgDetailDialog {
             val bundle = Bundle()
             bundle.putString(ID_KEY, id.toString())
